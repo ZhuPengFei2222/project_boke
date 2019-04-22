@@ -13,7 +13,7 @@
           </h2>
           <div v-for="item in content" v-bind:key="item.id" class="con_one">
             <figure>
-              <router-link :to="item.id">
+              <router-link :to="item.router">
                 <img
                   :src="item.pic_href"
                   :alt="item.list"
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <v-right v-bind:hello="content"></v-right>
+      <slot name="v-right" v-bind:hello="content"></slot>
       <div style="clear:both"></div>
     </content>
     <v-footer></v-footer>
@@ -46,11 +46,6 @@
 </template>
 
 <script>
-import header from "./page/header";
-import nav from "./page/nav";
-import right from "./page/right";
-import footer from "./page/footer";
-
 export default {
   name: "jsxq",
   data() {
@@ -113,13 +108,7 @@ export default {
         }
       ]
     };
-  },
-  components: {
-    "v-header": header,
-    "v-right": right,
-    "v-nav": nav,
-    "v-footer": footer
-  },
+  },  
   methods:{
      chartString:function(obj){
          return obj.length > 90 ? obj.slice(0, 90) + "..." : obj.content; 

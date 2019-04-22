@@ -34,7 +34,7 @@
             </h2>       
             <div v-for="item in content" v-bind:key="item.id" class="con_one">
                 <figure>
-                    <router-link :to="item.id"><img :src="item.pic_href"  :alt="item.list" style="width: 167.5px; height: 137px; display: block;" /></router-link>                  
+                    <router-link :to="item.router"><img :src="item.pic_href"  :alt="item.list" style="width: 167.5px; height: 137px; display: block;" /></router-link>                  
                 </figure>
                 <div class="figure_right">
                    <h3><router-link :to="item.router">{{item.list}}</router-link></h3>
@@ -45,7 +45,7 @@
             </div>
         </div>
       </div>
-      <v-right v-bind:hello="content"></v-right>
+      <slot name="v-right" v-bind:hello="content"></slot>
       <div style="clear:both"></div>     
     </content>
     <v-footer></v-footer>    
@@ -53,11 +53,6 @@
 </template>
 
 <script>
-import header from "./page/header";
-import nav from "./page/nav";
-import right from "./page/right";
-import footer from "./page/footer";
-
 export default {
   name: "index", 
   data() {
@@ -132,7 +127,7 @@ export default {
   },
   watch:{
     
-  },
+  }, 
   methods:{
      chartString:function(obj){
          return obj.length > 90 ? obj.slice(0, 90) + "..." : obj.content; 
@@ -140,20 +135,11 @@ export default {
   },
   created: {
     //this.Axios.get(url,parmas:{a:1}).then(res=>{},res=>{})
-  },
-  components: {
-    "v-header": header,
-    "v-right": right,
-    "v-nav": nav,
-    "v-footer":footer
-  }
+  },  
 };
 </script>
 
 <style>
-#app {
-  width: 100%;
-}
 
 .content {
   width: 1000px;

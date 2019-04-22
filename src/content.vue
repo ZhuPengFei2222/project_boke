@@ -10,10 +10,9 @@
                         <div class="news_author"><span class="au01">{{item.name}}</span><span class="au02">{{item.data}}</span></div>
                         <div class="news_content" v-html="item.content"></div>
                      </div>
-                 </div>
-             
+                 </div>             
          </div>
-         <v-right v-bind:hello="content"></v-right>
+         <slot name="v-right" v-bind:hello="content"></slot>
          <div style="clear:both"></div>     
        </content>
        <v-footer></v-footer>
@@ -21,11 +20,6 @@
 </template>
 
 <script>
-import header from "./page/header";
-import nav from "./page/nav";
-import right from "./page/right";
-import footer from "./page/footer";
-
 export default {
    name:"content",
    data(){
@@ -101,13 +95,7 @@ export default {
          '$route'( to , from ){
              this.id = to.params.id;                          
          }
-   },
-   components:{
-       "v-header": header,
-       "v-right": right,
-       "v-nav": nav,
-       "v-footer":footer
-   } 
+   },   
 }
 </script>
 
