@@ -36,14 +36,14 @@ export default {
        list:[
            {
               id:"1",
-              name:"关于博主",
-              url:"",
+              name:"最新动态",
+              url:"/jsxq",
               sfd:"sfd_cls1"              
            },
            {
               id:"2",
               name:"心情随笔",
-              url:"",              
+              url:"/xqsb",              
               sfd:"sfd_cls2"              
            },
            {
@@ -55,13 +55,13 @@ export default {
            {
               id:"4",
               name:"网站首页",
-              url:"",              
+              url:"/",              
               sfd:"sfd_cls4"              
            },
            {
               id:"5",
-              name:"留言版",
-              url:"",              
+              name:"关于我",
+              url:"/gyw",              
               sfd:"sfd_cls5"              
            },
            {

@@ -106,6 +106,7 @@ export default {
 </script>
 
 <style>
-   .nav{display: -webkit-flex; justify-content: center; flex-wrap: nowrap; background: rgb(84, 92, 100)}
+   .nav{display: -webkit-flex; justify-content: center; flex-wrap: nowrap; background: rgb(84, 92, 100);width: 100%; min-width: 1140px;}
    .sear{ margin-top: 10px; margin-left: 100px; display: -webkit-flex; flex-wrap: nowrap;}
+   
 </style>

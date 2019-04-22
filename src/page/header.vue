@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style>
-  .header{ height: 200px; background: url('~@/assets/images/top_b.jpg'); display: -webkit-flex;  flex-direction: column }
+  .header{ height: 200px; background: url('~@/assets/images/top_b.jpg'); display: -webkit-flex;  flex-direction: column ;width: 100%; min-width: 1140px; }
   .head_content{ width: 1000px; margin:0 auto;}
   .header:after{ content: " "; clear:both; zoom: 1;}
   .header::before{ content: " "; clear: both; zoom: 1;}

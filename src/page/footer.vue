@@ -16,7 +16,7 @@ export default {
 <style>
   .clearfox::after{ clear: both; zoom: 1;}
   .clearfox::before{ clear: both; zoom: 1;}
-  .footer{ background-color:gray; text-align: center; padding: 40px 0px;}
+  .footer{ background-color:gray; text-align: center; padding: 40px 0px;width: 100%; min-width: 1140px;}
   .footer h1{ color: #fff!important;}
   .footer p{ margin-top: 10px;color: #fff!important;}
 </style>
