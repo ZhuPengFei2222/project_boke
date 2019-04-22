@@ -1,7 +1,5 @@
 <template>
-    <div id="content">
-       <v-header></v-header>      
-       <v-nav></v-nav>      
+    <div id="content">           
        <content class="content">
          <div class="left">             
                  <div v-for="item in r_content" v-bind:key="item.id">
@@ -14,8 +12,7 @@
          </div>
          <slot name="v-right" v-bind:hello="content"></slot>
          <div style="clear:both"></div>     
-       </content>
-       <v-footer></v-footer>
+       </content>      
     </div>
 </template>
 

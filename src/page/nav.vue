@@ -79,8 +79,8 @@ export default {
         },
         {
           id: 6,
-          name: "留言版",
-          url: "/lyb",
+          name: "echart",
+          url: "/echart",
           is_block: "nav_css1",
           children:false
         },

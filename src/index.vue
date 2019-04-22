@@ -1,7 +1,5 @@
 <template>
-  <div id="index">
-    <v-header></v-header>
-    <v-nav></v-nav>
+  <div id="index">    
     <content class="content">
       <div class="left">
         <div class="hdp">
@@ -47,8 +45,7 @@
       </div>
       <slot name="v-right" v-bind:hello="content"></slot>
       <div style="clear:both"></div>     
-    </content>
-    <v-footer></v-footer>    
+    </content>   
   </div> 
 </template>
 
