@@ -79,7 +79,7 @@ export default {
         },
         {
           id: 6,
-          name: "echart",
+          name: "echart与算法",
           url: "/echart",
           is_block: "nav_css1",
           children:false
