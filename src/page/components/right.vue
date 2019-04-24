@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { create } from 'domain';
 export default {
    data(){
       return{

@@ -1,57 +1,84 @@
 <template>
-  <div id="echart">     
-      <span style="font-family: 'PingFang SC'; font-size:14px;margin-right:10px;">请输入添加文字:<input type="text" placeholder="请输入内容" id="text1" style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;"><span v-show="w_f" style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;">:请输入文字</span></span>
-      <span style="font-family: 'PingFang SC'; font-size:14px;margin-right:10px;">请输入添加数字:<input type="text" placeholder="请输入内容" id="text2" style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;"><span v-show="w_f" style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;">:请输入数字</span></span>
-      <el-button type="primary" v-on:click="font_add()">添加</el-button>
-      <el-button type="info" v-on:click="compute()">绘制eCharts图</el-button><span v-show="table_f" style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;">表格不能为空</span>
-      <el-button type="info" v-on:click="sum_solt()" style="margin-left:10px;">表格数字排序</el-button>            
-      <el-table
-      :data="tableData"
-      style="width: 100%;margin-top:20px">
-      <el-table-column
-        prop="name"
-        label="文字"
-        align="center"
-        width="300">
-      </el-table-column>
-      <el-table-column
-        prop="sum"
-        label="数字"
-        align="center"
-        width="300">
-      </el-table-column>
-      <el-table-column        
-        align="center"       
-        label="移去">
+  <div id="echart">
+    <span style="font-family: 'PingFang SC'; font-size:14px;margin-right:10px;">
+      请输入添加文字:
+      <input
+        type="text"
+        placeholder="请输入内容"
+        id="text1"
+        style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;"
+      >
+      <span
+        v-show="w_f"
+        style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;"
+      >:请输入文字</span>
+    </span>
+    <span style="font-family: 'PingFang SC'; font-size:14px;margin-right:10px;">
+      请输入添加数字:
+      <input
+        type="text"
+        placeholder="请输入内容"
+        id="text2"
+        style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;"
+      >
+      <span
+        v-show="w_f"
+        style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;"
+      >:请输入数字</span>
+    </span>
+    <el-button type="primary" v-on:click="font_add()">添加</el-button>
+    <el-button type="info" v-on:click="compute()">绘制eCharts图</el-button>
+    <span
+      v-show="table_f"
+      style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;"
+    >表格不能为空</span>
+    <el-button type="info" v-on:click="sum_solt()" style="margin-left:10px;">表格数字排序</el-button>
+    <el-table :data="tableData" style="width: 100%;margin-top:20px">
+      <el-table-column prop="name" label="文字" align="center" width="300"></el-table-column>
+      <el-table-column prop="value" label="数字" align="center" width="300"></el-table-column>
+      <el-table-column align="center" label="移去">
         <template slot-scope="scope">
           <el-button type="primary" @click.native.prevent="deleteRow(scope.$index, tableData)">移除</el-button>
         </template>
       </el-table-column>
-     </el-table>
+    </el-table>
+    <div v-show="charts">
       <h1 style="margin-top:20px;">树形图标如下:</h1>
-      <div id="myChart" :style="{width: '800px', height: '300px',margin:'0 auto',}"></div>
-      <h1>线状图标如下:</h1>      
+      <div id="myChart_bar" :style="{width: '800px', height: '300px',margin:'0 auto',}"></div>
+      <h1>线状图标如下:</h1>
+      <div id="myChart_line" :style="{width: '800px', height: '300px',margin:'0 auto',}"></div>
+      <h1>饼形图标如下:</h1>
+      <div id="myChart_pie" :style="{width: '800px', height: '300px',margin:'0 auto',}"></div>
+    </div>
+   <h1 style="text-align:center;margin-top:50px; font-size:38px;">_____________ 滑动幻灯片 _____________</h1>
+   <el-carousel :interval="4000" type="card" height="500px">
+    <el-carousel-item v-for="item in pic" :key="item">
+      <h3><img :src="item" width="500" /></h3>
+    </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
 <script>
-import { all } from 'q';
+
 export default {
   name:'echart',
   data(){
      return{
          names:[],
-         sums:[],
+         values:[],
          w_f:false,
          table_f:false,
-         tableData: []         
+         charts:false,
+         tableData: [],                
+         pic:[require("@/assets/images/echart/1.jpg"),require("@/assets/images/echart/2.jpg"),require("@/assets/images/echart/3.jpg"),require("@/assets/images/echart/4.jpg"),require("@/assets/images/echart/5.jpg")]
      }
   },
-  
+
   methods: {
     drawLine(){
         // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(document.getElementById('myChart'))
+        let myChart = this.$echarts.init(document.getElementById('myChart_bar'))
         // 绘制图表
         myChart.setOption({         
             tooltip: {},
@@ -62,15 +89,70 @@ export default {
             series: [{
                 name: '销量',
                 type: 'bar',
-                data: this.sums
+                data: this.values
             }]
         });
-    },   
+    },
+    drawXian(){
+        // 基于准备好的dom，初始化echarts实例
+        let myChart = this.$echarts.init(document.getElementById('myChart_line'))
+        // 绘制图表
+        myChart.setOption({         
+            tooltip: {},
+            xAxis: {
+                data: this.names
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'line',
+                data: this.values
+            }]
+        });
+    },
+    drawpie(){
+        // 基于准备好的dom，初始化echarts实例
+        let myChart = this.$echarts.init(document.getElementById('myChart_pie'));       
+       
+        // 绘制图表
+        myChart.setOption({         
+            tooltip: {
+              trigger: 'item',
+              formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },            
+            series: [{
+                name:'访问来源',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                  normal: {
+                     show: false,
+                     position: 'center'
+                  },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                      }
+                   }
+                },
+                labelLine: {
+                      normal: {
+                      show: false
+                   }
+                 },  
+                            
+                data:this.tableData
+            }]
+        });
+    },
     font_add(){      
        let str = /^\S+$/;
-       let sum = /^[0-9]+$/;       
-       let array =  { "name" : document.getElementById('text1').value, "sum" : document.getElementById('text2').value};                            
-       if(str.test(document.getElementById('text1').value) && sum.test(document.getElementById('text2').value)){
+       let value = /^[0-9]+$/;       
+       let array =  { "name" : document.getElementById('text1').value, "value" : document.getElementById('text2').value};                            
+       if(str.test(document.getElementById('text1').value) && value.test(document.getElementById('text2').value)){
             this.w_f = false;
             this.tableData.push(array);
        }
@@ -78,31 +160,35 @@ export default {
        
     },
     compute(){
-        console.log(this.tableData);
+        this.charts = true;
+        //console.log(this.tableData);
         if(this.tableData.length != 0){
             this.table_f = false;
             this.tableData.map(item =>{
                  this.names.push(item.name);
-                 this.sums.push(item.sum);
-                 this.drawLine();                
+                 this.values.push(item.value);
+                 this.drawLine();     
+                 this.drawXian();     
+                 this.drawpie();      
             })
             this.names = [];
-            this.sums = [];
+            this.values = [];
         }
         else{ this.table_f = true;}
     },
     sum_solt(){
        //this.tableData[1] = { name : "ss" , sum : "1"};      
        if(this.tableData.length != 0){           
-               for(var i = 0; i < this.tableData.length - 1 ; i++){
+               for(var i = 0; i < this.tableData.length; i++){
                  for(var j = 0; j < this.tableData.length - i - 1; j++){
-                     if(this.tableData[j].sum > this.tableData[j+1].sum){
-                       var temp = {"name":this.tableData[j].name,"sum":this.tableData[j].sum};
-                       //console.log(temp);
+                     if(this.tableData[j].value > this.tableData[j+1].value){
+                       var temp = {}; 
+                       temp.name = this.tableData[j].name;
+                       temp.value = this.tableData[j].value;                       
                        this.tableData[j].name = this.tableData[j+1].name;
-                       this.tableData[j].sum =this.tableData[j+1].sum;
+                       this.tableData[j].value =this.tableData[j+1].value;
                        this.tableData[j+1].name = temp.name;
-                       this.tableData[j+1].sum = temp.sum;
+                       this.tableData[j+1].value = temp.value;
                }
              }               
           }              
@@ -117,12 +203,31 @@ export default {
 </script>
 
 <style>
-   #echart{
-       width: 1000px; 
-       margin: 30px auto;
-   }
-   #echart h1{
-       font-size: 32px;
-       padding-bottom: 20px;
-   }
+#echart {
+  width: 1000px;
+  margin: 30px auto;
+}
+#echart h1 {
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+  .el-carousel{
+    margin-top: 30px;
+  }
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
 </style>
