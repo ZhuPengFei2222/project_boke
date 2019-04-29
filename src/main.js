@@ -8,6 +8,7 @@ import store from './vuex/vuex'
 import './assets/css/style.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import echarts from 'echarts'
+import VueWechatTitle from 'vue-wechat-title'; 
 
 /*if(navigator.platform.indexOf('Win32')!=-1){ 
 
@@ -23,6 +24,7 @@ import echarts from 'echarts'
 
 Vue.use(ElementUI);
 Vue.use(Vueaxios,Axios);
+Vue.use(VueWechatTitle);
 Vue.prototype.$echarts = echarts;
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="echart">
+  <div id="echart" v-wechat-title="$route.meta.title">
     <span style="font-family: 'PingFang SC'; font-size:14px;margin-right:10px;">
       请输入添加文字:
       <input

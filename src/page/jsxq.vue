@@ -1,5 +1,5 @@
 <template>
-  <div id="jsxq">    
+  <div id="jsxq" v-wechat-title="$route.meta.title">    
     <content class="content">
       <div class="left">
         <div class="content_sy">

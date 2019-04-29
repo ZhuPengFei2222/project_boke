@@ -14,12 +14,12 @@ import content from './../page/content.vue'
 Vue.use(VueRouter);
 
 const routers = [
-  { path: '/', component: index},
-  { path: '/jsxq', component: jsxq },
-  { path: '/xqsb', component: xqsb },
-  { path: '/gyw', component: gyw },
-  { path: '/grgd', component: grgd },
-  { path: '/echart',component : echart},
+  { path: '/', component: index, meta:{title:'主页'}},
+  { path: '/jsxq', component: jsxq, meta:{title:'记录心情'} },
+  { path: '/xqsb', component: xqsb, meta:{title:'心情随笔'} },
+  { path: '/gyw', component: gyw, meta:{title:'关于我'} },
+  { path: '/grgd', component: grgd, meta:{title:'个人归档'} },
+  { path: '/echart',component : echart, meta:{title:'table与echart'}},
   { path: '/content/:id', component: content }
 ]
 

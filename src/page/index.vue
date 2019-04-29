@@ -1,5 +1,5 @@
 <template>  
-    <content class="content">
+    <content class="content" v-wechat-title="$route.meta.title">
       <div class="left">
         <div class="hdp">
           <el-carousel :interval="5000" arrow="never">

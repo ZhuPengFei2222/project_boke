@@ -3,7 +3,7 @@
        <content class="content">
          <div class="left">             
                  <div v-for="item in r_content" v-bind:key="item.id">
-                     <div v-if="item!=''">
+                     <div v-if="item!=''" v-wechat-title="$route.meta.title=item.list">
                         <div class="news_title">{{item.list}}</div>
                         <div class="news_author"><span class="au01">{{item.name}}</span><span class="au02">{{item.data}}</span></div>
                         <div class="news_content" v-html="item.content"></div>
