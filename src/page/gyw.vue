@@ -17,7 +17,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .con {
   display: block;
   background:url("~@/assets/images/1.jpg") no-repeat center;

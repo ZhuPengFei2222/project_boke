@@ -11,8 +11,7 @@
                  </div>             
          </div>
          <slot name="v-right"></slot>
-         <div style="clear:both"></div>     
-        
+         <div style="clear:both"></div>             
        </content>      
     </div>
 </template>
@@ -27,13 +26,13 @@ export default {
    }, 
    props:{
       hello:{
-          type:Array,
+          type:Object,
           required:true
       }
    }, 
    computed:{      
       r_content:function(){                    
-          return this.hello.map(item=>{
+          return this.s_hello.map(item=>{
               if(item.id == this.id){                  
                   return item;
               }    
@@ -41,8 +40,10 @@ export default {
                   return ""
               }          
           })          
-      },      
-      
+      }, 
+      s_hello:function(){
+          return this.hello.jlrz
+      }        
    },
    watch:{       
          '$route'( to ){
@@ -52,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
  .content {
   width: 1000px;
   display: block;

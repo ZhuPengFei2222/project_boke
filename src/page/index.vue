@@ -1,10 +1,9 @@
-<template>
-  <div id="index">          
+<template>  
     <content class="content">
       <div class="left">
         <div class="hdp">
-          <el-carousel :interval="5000" arrow="never" loop="flase">
-            <el-carousel-item v-for="item in pic" :key="item">
+          <el-carousel :interval="5000" arrow="never">
+            <el-carousel-item v-for="item in pic" v-bind:key="item.id">
               <h3>
                 <img :src="item.pic_url" width="400" height="300">
               </h3>
@@ -30,7 +29,7 @@
                 <span><router-link to="/jsxq">更多</router-link></span>
                 <b>最新</b>文章
             </h2>       
-            <div v-for="item in hello" v-bind:key="item.id" class="con_one">
+            <div v-for="item in s_hello" v-bind:key="item.id" class="con_one">
                 <figure>
                     <router-link :to="item.router"><img :src="item.pic_href"  :alt="item.list" style="width: 167.5px; height: 137px; display: block;" /></router-link>                  
                 </figure>
@@ -41,13 +40,13 @@
                 </div>
                 <div style="clear:both"></div>
             </div>
+           
         </div>
-      </div>
-      {{bb()}}
+        
+      </div>      
       <slot name="v-right"></slot>      
       <div style="clear:both"></div>     
-    </content>   
-  </div> 
+    </content>  
 </template>
 
 <script>
@@ -57,15 +56,19 @@ export default {
     return {
       pic: [
         {
+          id:1,
           pic_url: require("@/assets/images/swiper/1.jpg")
         },
         {
+          id:2,
           pic_url: require("@/assets/images/swiper/2.jpg")
         },
         {
+          id:3,
           pic_url: require("@/assets/images/swiper/3.jpg")
         },
         {
+          id:4,
           pic_url: require("@/assets/images/swiper/4.jpg")
         }
       ],     
@@ -73,28 +76,22 @@ export default {
   },
   props:{
     hello:{
-       type:Array,
+       type:Object,
        required:true
      }
-  },
-  watch:{
-    
   }, 
   computed:{
-     
-      
+     bb : function(){
+         return this.$store.state.content;
+     },
+     s_hello : function(){
+        return this.hello.jlrz
+     }
   },
   methods:{
      chartString:function(obj){
          return obj.length > 90 ? obj.slice(0, 90) + "..." : obj.content; 
-     },
-     bb : function(){
-         return this.$store.state.content;
-     }
-  },
-  created: {
-    //this.Axios.get(url,parmas:{a:1}).then(res=>{},res=>{})   
-    
+     },     
   },  
 };
 </script>

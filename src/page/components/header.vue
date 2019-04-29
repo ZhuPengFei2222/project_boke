@@ -10,7 +10,7 @@
 <script>
 import 'animate.css'
 export default {
-  name:'header',
+  name:'headers',
   data(){
     return {        
         
@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .header{ height: 200px; background: url('~@/assets/images/top_b.jpg'); display: -webkit-flex;  flex-direction: column ;width: 100%; min-width: 1140px; }
   .head_content{ width: 1000px; margin:0 auto;}
   .header:after{ content: " "; clear:both; zoom: 1;}

@@ -9,7 +9,7 @@
             </span>
             <b>最新</b>文章
           </h2>
-          <div v-for="item in s_hello" v-bind:key="item.id" class="con_one">
+          <div v-for="item in content" v-bind:key="item.id" class="con_one">
             <figure>
               <router-link :to="item.router">
                 <img
@@ -34,7 +34,7 @@
             </div>
             <div style="clear:both"></div>
           </div>
-        </div>
+        </div>       
       </div>
       <slot name="v-right"></slot>
       <div style="clear:both"></div>
@@ -44,22 +44,17 @@
 
 <script>
 export default {
-  name: "jsxq",
+  name: "grgd",
   data() {
     return {
-
+        content:[]
     };
-  },
-  props:{
-    hello:{
-       type:Object,
-       required:true
-     }
-  }, 
+  },   
   computed:{
-    s_hello :function(){
-        return this.hello.jlrz
-     }
+     revercontent(){
+         return this.content
+     },
+     
   },
   methods:{
      chartString:function(obj){

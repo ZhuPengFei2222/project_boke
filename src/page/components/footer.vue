@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .clearfox::after{ clear: both; zoom: 1;}
   .clearfox::before{ clear: both; zoom: 1;}
   .footer{ background-color:gray; text-align: center; padding: 40px 0px;width: 100%; min-width: 1140px;}

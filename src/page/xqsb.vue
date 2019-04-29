@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <slot name="v-right" v-bind:hello="content"></slot>
+    <slot name="v-right"></slot>
     <div style="clear:both"></div>
   </content>
 </template>
@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .content {
   width: 1000px;
   display: block;

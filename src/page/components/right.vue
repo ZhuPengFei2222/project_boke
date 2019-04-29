@@ -8,7 +8,7 @@
         <div class="content_w">
            <h3>最新文章</h3>
            <ul>           
-               <li v-for="ins in hello" v-bind:key="ins.id">
+               <li v-for="ins in s_hello" v-bind:key="ins.id">
                    <router-link :to="ins.router" replace>{{ins.list}}</router-link>
                </li>
            </ul>
@@ -74,20 +74,19 @@ export default {
    },
    props:{
       hello:{
-          type:Array,
+          type:Object,
           required:true
       }
    }, 
-   methods:{
-     
-   },
-   created:{
-     
-   }
+   computed:{
+      s_hello:function(){
+        return this.hello.jlrz
+     }
+   },   
 }
 </script>
 
-<style>
+<style scoped>
 .right{ float: left; width: 400px; margin-left: 30px;}
 .geren_right{ display: -webkit-flex; flex-wrap: wrap;}
 .geren_right div{ width: 33%; height: 100px; text-align: center; line-height: 100px; font-size: 12px; box-sizing:border-box;}

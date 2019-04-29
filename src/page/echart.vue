@@ -50,17 +50,22 @@
       <h1>饼形图标如下:</h1>
       <div id="myChart_pie" :style="{width: '800px', height: '300px',margin:'0 auto',}"></div>
     </div>
+
+    <div class="suanfa">
+         
+    </div>
+
    <h1 style="text-align:center;margin-top:50px; font-size:38px;">_____________ 滑动幻灯片 _____________</h1>
-   <el-carousel :interval="4000" type="card" height="500px">
+   <el-carousel :interval="4000" type="card" height="500px" style=" margin-top: 30px;">
     <el-carousel-item v-for="item in pic" :key="item">
       <h3><img :src="item" width="500" /></h3>
     </el-carousel-item>
     </el-carousel>
+    
   </div>
 </template>
 
 <script>
-
 export default {
   name:'echart',
   data(){
@@ -121,7 +126,7 @@ export default {
               formatter: "{a} <br/>{b}: {c} ({d}%)"
             },            
             series: [{
-                name:'访问来源',
+                name:'销量',
                 type:'pie',
                 radius: ['50%', '70%'],
                 avoidLabelOverlap: false,
@@ -155,14 +160,15 @@ export default {
        if(str.test(document.getElementById('text1').value) && value.test(document.getElementById('text2').value)){
             this.w_f = false;
             this.tableData.push(array);
+            localStorage.setItem(document.getElementById('text1').value,document.getElementById('text2').value);
        }
        else{ this.w_f = true;}       
        
-    },
-    compute(){
-        this.charts = true;
+    },       
+    compute(){        
         //console.log(this.tableData);
         if(this.tableData.length != 0){
+            this.charts = true;
             this.table_f = false;
             this.tableData.map(item =>{
                  this.names.push(item.name);
@@ -195,14 +201,15 @@ export default {
        }       
     },
     deleteRow(index, rows){
-        rows.splice(index, 1);
+        localStorage.removeItem(this.tableData[index].name);
+        rows.splice(index, 1);                    
+        
     }
-  }
-
+  }  
 }
 </script>
 
-<style>
+<style scoped>
 #echart {
   width: 1000px;
   margin: 30px auto;
@@ -211,9 +218,7 @@ export default {
   font-size: 24px;
   padding-bottom: 20px;
 }
-  .el-carousel{
-    margin-top: 30px;
-  }
+  
   .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;
@@ -229,5 +234,6 @@ export default {
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
+  .suanfa{ margin-top: 30px;}
 
 </style>

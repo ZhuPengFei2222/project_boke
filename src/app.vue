@@ -1,13 +1,13 @@
 <template>
-  <div class="view">
+  <div class="view" id="app">   
     <v-header></v-header>
     <v-nav></v-nav>
-    <router-view v-bind:hello="reverContent">
+    <router-view v-bind:hello="content">
       <div slot="v-right">
-        <v-right v-bind:hello="reverContent"></v-right>
+        <v-right v-bind:hello="content"></v-right>
       </div>
-    </router-view>
-    <v-footer></v-footer>
+    </router-view> 
+    <v-footer></v-footer>    
   </div>
 </template>
 
@@ -20,8 +20,9 @@ import footer from "./page/components/footer";
 export default {
   data() {
     return {
-       content: [
-        {
+       content: {
+        "jlrz":
+        [{
           id: 1,
           list: "加油加油加油新的一天",
           name: "猪",
@@ -80,21 +81,38 @@ export default {
           pic_href:require("@/assets/images/content/1/2.jpg"),
           content:"<p>今天又是复杂的一天,面试了一家，谈的很开心，感觉面试我的小姐姐的人很好，但是她说她们公司做电子商务的，我一般做的是门户网站，电子商务网站我知道 很多购物车等算法，自己却只知道的算法只有冒泡,快速，二叉树。</p><p>话说很好，但是很遗憾，还是平时积累知识少了。可惜了。可惜了。我要在努力努力，加油</p><img src='"+require("./assets/images/content/1/2.jpg")+"' style='width:100%;margin-top:10px' />",
           Onclick: "30"
-        }
-      ],      
+        }],
+        "grgd":
+        [{
+          id: 1,
+          list: "加油加油加油新的一天",
+          name: "猪",
+          data: "2019-04-21 17:25:38 ",
+          router:"/content/1",
+          pic_href:require("@/assets/images/content/w1.jpg"),
+          content:"<p>今天又是失业的一天，在家里撸vue,很多家公司要求会vue,自己都学习了下，感觉很简单。多学还是有好处的、平时打游戏打多了。怪自己不够努力！！真的很烦。这已经是失业快一个月了~~vue相对还是比较简单把！！</p><p style='text-indent:0px'><img src='"+require("./assets/images/content/1/1.jpg")+"' style='width:100%;margin-top:10px' /></p><p>努力努力努力努力！！！！！！！！</p>",
+          Onclick: "30"
+        },
+        {
+          id: 1,
+          list: "基本包装类型",
+          name: "猪",
+          data: "2019-04-21 17:25:38 ",
+          router:"/content/11",
+          pic_href:require("@/assets/images/content/w1.jpg"),
+          content:"<p>基本包装类型</p><p>Boolean、Number、String</p><p>var s1='some text'</p><p>var s2=s1.substring(2);</p>",
+          Onclick: "30"
+        }] 
+      },      
     };
   },  
+ 
   components: {
     "v-header": header,
     "v-nav": nav,
     "v-right": right,
     "v-footer": footer
-  },
-  computed:{
-    reverContent(){
-         return this.content.reverse();
-    }
-  }
+  }, 
 };
 </script>
 
