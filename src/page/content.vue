@@ -13,7 +13,7 @@
          <slot name="v-right"></slot>
          <div style="clear:both"></div>             
        </content>    
-       {{this.$router.params.ispc}}  
+      
     </div>
 </template>
 
