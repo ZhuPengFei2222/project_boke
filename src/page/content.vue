@@ -12,16 +12,17 @@
          </div>
          <slot name="v-right"></slot>
          <div style="clear:both"></div>             
-       </content>      
+       </content>    
+       {{this.$router.params.ispc}}  
     </div>
 </template>
 
 <script>
 export default {
-   name:"content",
+   name:"contents",
    data(){
      return {
-       id:this.$route.params.id,      
+       id:this.$route.params.id,             
      }    
    }, 
    props:{
@@ -29,7 +30,7 @@ export default {
           type:Object,
           required:true
       }
-   }, 
+   },    
    computed:{      
       r_content:function(){                    
           return this.s_hello.map(item=>{
@@ -41,8 +42,14 @@ export default {
               }          
           })          
       }, 
-      s_hello:function(){
-          return this.hello.jlrz
+      s_hello:function(){ 
+            //console.log(this.$route.params.id);
+            if(this.$route.params.id >= 1000){
+               return this.hello.grgd         
+            }        
+            else{
+               return this.hello.jlrz          
+             }
       }        
    },
    watch:{       

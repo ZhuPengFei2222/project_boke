@@ -30,7 +30,11 @@ Vue.prototype.$echarts = echarts;
 
 //console.log(store.state.count);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+router.afterEach((to, from) => {
+  console.log(to.path);
+})
 
 new Vue({     
   router,

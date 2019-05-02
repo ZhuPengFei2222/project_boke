@@ -9,7 +9,7 @@
             </span>
             <b>最新</b>文章
           </h2>
-          <div v-for="item in content" v-bind:key="item.id" class="con_one">
+          <div v-for="item in revercontent" v-bind:key="item.id" class="con_one">
             <figure>
               <router-link :to="item.router">
                 <img
@@ -49,12 +49,17 @@ export default {
     return {
         content:[]
     };
-  },   
+  },  
+  props:{
+    hello:{
+     type:Object,
+     required:true
+    }
+  },
   computed:{
      revercontent(){
-         return this.content
-     },
-     
+         return this.hello.grgd
+     },     
   },
   methods:{
      chartString:function(obj){

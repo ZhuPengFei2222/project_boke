@@ -6,7 +6,7 @@
         type="text"
         placeholder="请输入内容"
         id="text1"
-        style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;"
+        style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;width:110px"
       >
       <span
         v-show="w_f"
@@ -19,7 +19,7 @@
         type="text"
         placeholder="请输入内容"
         id="text2"
-        style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;"
+        style="line-height:30px;height:30px;text-indent:5px;margin-left:10px;width:110px"
       >
       <span
         v-show="w_f"
@@ -32,7 +32,8 @@
       v-show="table_f"
       style="color:red;font-family: 'PingFang SC'; font-size:14px;margin-left:10px;"
     >表格不能为空</span>
-    <el-button type="info" v-on:click="sum_solt()" style="margin-left:10px;">表格数字排序</el-button>
+    <el-button type="info" v-on:click="sum_solt()" style="margin-left:10px;">{{table_sort}}</el-button>
+    <el-button type="info" v-on:click="table_clear()" style="margin-left:10px;">清空</el-button>
     <el-table :data="tableData" style="width: 100%;margin-top:20px">
       <el-table-column prop="name" label="文字" align="center" width="300"></el-table-column>
       <el-table-column prop="value" label="数字" align="center" width="300"></el-table-column>
@@ -66,6 +67,12 @@
 </template>
 
 <script>
+function srot_small_big(a,b){
+              return a.value - b.value
+}
+function srot_big_small(a,b){
+              return b.value - a.value
+}  
 export default {
   name:'echart',
   data(){
@@ -76,10 +83,16 @@ export default {
          table_f:false,
          charts:false,
          tableData: [],                
-         pic:[require("@/assets/images/echart/1.jpg"),require("@/assets/images/echart/2.jpg"),require("@/assets/images/echart/3.jpg"),require("@/assets/images/echart/4.jpg"),require("@/assets/images/echart/5.jpg")]
+         pic:[require("@/assets/images/echart/1.jpg"),require("@/assets/images/echart/2.jpg"),require("@/assets/images/echart/3.jpg"),require("@/assets/images/echart/4.jpg"),require("@/assets/images/echart/5.jpg")],
+         table_sort:"表格数字排序"
      }
   },
-
+  created(){  
+     if(window.localStorage!=0){             
+       var getLoadStroage = localStorage.getItem('array');
+       this.tableData = JSON.parse(getLoadStroage);
+     }
+  },
   methods: {
     drawLine(){
         // 基于准备好的dom，初始化echarts实例
@@ -160,7 +173,7 @@ export default {
        if(str.test(document.getElementById('text1').value) && value.test(document.getElementById('text2').value)){
             this.w_f = false;
             this.tableData.push(array);
-            localStorage.setItem(document.getElementById('text1').value,document.getElementById('text2').value);
+            localStorage.setItem('array',JSON.stringify(this.tableData));
        }
        else{ this.w_f = true;}       
        
@@ -182,28 +195,32 @@ export default {
         }
         else{ this.table_f = true;}
     },
-    sum_solt(){
-       //this.tableData[1] = { name : "ss" , sum : "1"};      
-       if(this.tableData.length != 0){           
-               for(var i = 0; i < this.tableData.length; i++){
-                 for(var j = 0; j < this.tableData.length - i - 1; j++){
-                     if(this.tableData[j].value > this.tableData[j+1].value){
-                       var temp = {}; 
-                       temp.name = this.tableData[j].name;
-                       temp.value = this.tableData[j].value;                       
-                       this.tableData[j].name = this.tableData[j+1].name;
-                       this.tableData[j].value =this.tableData[j+1].value;
-                       this.tableData[j+1].name = temp.name;
-                       this.tableData[j+1].value = temp.value;
-               }
-             }               
-          }              
+    sum_solt(){         
+       if(this.tableData.length != 0){                        
+          if(this.table_sort == "表格数字排序" || this.table_sort == "表格数字排序(从大到小)"){            
+            this.tableData.sort(srot_small_big); 
+            this.table_sort = "表格数字排序(从小到大)";
+          }
+          else{           
+            this.tableData.sort(srot_big_small); 
+            this.table_sort = "表格数字排序(从大到小)";
+          }
+                
        }       
     },
-    deleteRow(index, rows){
-        localStorage.removeItem(this.tableData[index].name);
-        rows.splice(index, 1);                    
-        
+    srot_small_big(a,b){
+              return a.value - b.value
+    },
+    srot_big_small(a,b){
+              return b.value - a.value
+    },
+    deleteRow(index, rows){        
+        rows.splice(index, 1);                        
+        localStorage.setItem('array',JSON.stringify(this.tableData));        
+    },
+    table_clear(){
+        this.tableData = [];
+        localStorage.clear();
     }
   }  
 }
